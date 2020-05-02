@@ -47,3 +47,82 @@ EXEC aprobarDocumento
 @fecha_pub = @fec_p,
 @aprobador = @apr,
 @version = @ver
+
+--Ejecucion de Stored Procedure Crear Documento
+DECLARE @tit varchar(250)
+DECLARE @tip char(1)
+DECLARE @refe int
+SET @tit = 'Ejercicio c'
+SET @tip = 'c'
+SET @refe = 3
+EXEC crear_documento
+@titulo = @tit,
+@tipo = @tip,
+@referente = @refe
+
+--Ejecución de Stored Procedure Asociar Documento
+DECLARE @id_o int
+DECLARE @id_d int
+DECLARE @tipo_r char(1)
+SET @id_o = 1
+SET @id_d = 2
+SET @tipo_r = 'P'
+EXEC asociar_documento
+@documento_origen = @id_o, 
+@documento_destino = @id_d,
+@tipo_relacion = @tipo_r
+
+DECLARE @id_o int
+DECLARE @id_d int
+DECLARE @tipo_r char(1)
+SET @id_o = 1
+SET @id_d = 3
+SET @tipo_r = 'P'
+EXEC asociar_documento
+@documento_origen = @id_o, 
+@documento_destino = @id_d,
+@tipo_relacion = @tipo_r
+
+DECLARE @id_o int
+DECLARE @id_d int
+DECLARE @tipo_r char(1)
+SET @id_o = 3
+SET @id_d = 2
+SET @tipo_r = 'P'
+EXEC asociar_documento
+@documento_origen = @id_o, 
+@documento_destino = @id_d,
+@tipo_relacion = @tipo_r
+
+DECLARE @id_o int
+DECLARE @id_d int
+DECLARE @tipo_r char(1)
+SET @id_o = 1
+SET @id_d = 2
+SET @tipo_r = 'R'
+EXEC asociar_documento
+@documento_origen = @id_o, 
+@documento_destino = @id_d,
+@tipo_relacion = @tipo_r
+
+
+--Ejecucion Stored Procedure Eliminar Participante
+DECLARE @refe int
+SET @refe = 1
+EXEC eliminar_participante
+@id = @refe
+
+DECLARE @refe int
+SET @refe = 2
+EXEC eliminar_participante
+@id = @refe
+
+DECLARE @refe int
+SET @refe = 3
+EXEC eliminar_participante
+@id = @refe
+
+--Stored Procedure futuros vencimientos
+EXEC informe_vencimientos
+SELECT *
+FROM futuros_vencimientos

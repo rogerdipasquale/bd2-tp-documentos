@@ -1,4 +1,4 @@
---Creacion de Tablas
+--a)Creacion de Tablas
 CREATE TABLE DOCUMENTO
 (
     id INT IDENTITY PRIMARY KEY,
@@ -46,3 +46,20 @@ CREATE TABLE VERSION
     FOREIGN KEY (id_documento) REFERENCES DOCUMENTO (id)
 )
 
+--Tabla de auditoria sobre la tabla version
+CREATE TABLE version_auditoria
+(
+    id int,
+    id_documento int,
+    referente int,
+    revisor int,
+    aprobador int
+)
+
+--Tabla de futuros vencimientos
+CREATE TABLE futuros_vencimientos
+(
+    orden INT IDENTITY(1,1),
+    id_documento INT,
+    vencimiento datetime
+)
