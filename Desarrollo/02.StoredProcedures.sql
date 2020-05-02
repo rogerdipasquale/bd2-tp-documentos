@@ -136,30 +136,27 @@ BEGIN
     WHERE vencimiento IS NOT NULL
     ORDER BY vencimiento ASC
     OPEN cursorVenc
-    FETCH NEXT from cursorVenc into @id_anterior,@vencimiento_anterior
-    INSERT INTO futuros_vencimientos
-        (orden,id_documento,vencimiento)
-    SELECT @orden, @id_anterior, @vencimiento_anterior
+    FETCH NEXT from cursorVenc into @id_doc,@vencimiento
+    SET @id_anterior = @id_doc
+    SET @vencimiento_anterior = @vencimiento
     WHILE @@fetch_status = 0
 		BEGIN
-        FETCH NEXT FROM cursorVenc into @id_doc,@vencimiento
         IF((DATEPART(year,@vencimiento_anterior) = DATEPART(year,@vencimiento)) AND (DATEPART(month,@vencimiento_anterior) = DATEPART(month,@vencimiento)))
 				BEGIN
-            SET @id_anterior = @id_doc
-            SET @vencimiento_anterior = @vencimiento
             INSERT INTO futuros_vencimientos
                 (orden,id_documento,vencimiento)
-            SELECT @orden, @id_anterior, @vencimiento_anterior
+            SELECT @orden, @id_doc, @vencimiento
         END
 			ELSE
 				BEGIN
-            SET @id_anterior = @id_doc
-            SET @vencimiento_anterior = @vencimiento
             SET @orden = @orden + 1
             INSERT INTO futuros_vencimientos
                 (orden,id_documento,vencimiento)
-            SELECT @orden, @id_anterior, @vencimiento_anterior
+            SELECT @orden, @id_doc, @vencimiento
         END
+        SET @id_anterior = @id_doc
+        SET @vencimiento_anterior = @vencimiento
+        FETCH NEXT FROM cursorVenc into @id_doc,@vencimiento
     END
     CLOSE cursorVenc
     DEALLOCATE cursorVenc
