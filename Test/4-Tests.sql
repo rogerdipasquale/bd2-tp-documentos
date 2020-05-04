@@ -35,6 +35,6 @@ select * from relacion
 --trigger
 
 delete from version
-where id = 2
+where id = 1
 
 select * from verAuditoria

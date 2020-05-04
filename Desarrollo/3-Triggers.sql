@@ -1,6 +1,6 @@
 --f) auditoria de version
 
-create trigger tr_verAud
+create trigger tr_Auditoria
 on version
 for delete
 as
