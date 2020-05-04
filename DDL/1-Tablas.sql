@@ -44,3 +44,29 @@ create table version
 	foreign key (aprobador) references participante (id)
 )
 
+
+
+--e) eliminacion logica
+
+alter table documento
+	add eliminado bit not null default 0
+
+alter table participante
+	add eliminado bit not null default 0
+
+alter table version
+	add eliminado bit not null default 0
+
+alter table relacion
+	add eliminado bit not null default 0
+
+
+--h) tabla de vencimientos
+
+create table futVencimientos
+(
+	orden int identity (1,1),
+	id_documento int,
+	vencimiento datetime
+)
+
