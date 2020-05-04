@@ -70,3 +70,16 @@ create table futVencimientos
 	vencimiento datetime
 )
 
+------------------------------
+
+create table verAuditoria
+(
+	id int,
+	id_documento int, 
+	version char (8), 
+	referente int, 
+	revisor int, 
+	aprobador int, 
+	usuario varchar (255), 
+	fechaUpdate datetime
+)
