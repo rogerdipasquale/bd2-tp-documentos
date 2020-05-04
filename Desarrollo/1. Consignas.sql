@@ -70,11 +70,7 @@ BEGIN
 
 INSERT INTO DOCUMENTO(titulo, tipo, version_actual) VALUES (@titulo, @tipo, 'borrador');
 
-DECLARE @ultimo_id_documento int;
-SELECT @ultimo_id_documento=MAX(id) FROM DOCUMENTO;
-
-
-INSERT INTO VERSION(id_documento, version, borrador, referente) VALUES (@ultimo_id_documento, 'borrador', 1, @referente) 
+INSERT INTO VERSION(id_documento, version, borrador, referente) VALUES (@@Identity, 'borrador', 1, @referente) 
 
 END
 
