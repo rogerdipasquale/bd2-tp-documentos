@@ -46,3 +46,16 @@ CREATE TABLE VERSION (
 	FOREIGN KEY (aprobador) REFERENCES PARTICIPANTE(id),
 )
 
+CREATE TABLE AUDITORIA (
+	id int identity(1,1),
+	id_version int,
+	referente int,
+	revisor int,
+	aprobador int,
+		
+	PRIMARY KEY (id),
+	FOREIGN KEY (id_version) REFERENCES VERSION (id),
+	FOREIGN KEY (referente) REFERENCES PARTICIPANTE(id),
+	FOREIGN KEY (revisor) REFERENCES PARTICIPANTE(id),
+	FOREIGN KEY (aprobador) REFERENCES PARTICIPANTE(id),
+	)
