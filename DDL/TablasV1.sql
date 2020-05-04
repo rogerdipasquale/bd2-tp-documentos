@@ -44,3 +44,15 @@ ALTER TABLE DOCUMENTO ADD ELIMINADO BIT NOT NULL DEFAULT 0
 ALTER TABLE PARTICIPANTE  ADD ELIMINADO BIT NOT NULL DEFAULT 0
 ALTER TABLE VERSION  ADD ELIMINADO BIT NOT NULL DEFAULT 0
 ALTER TABLE RELACION  ADD ELIMINADO BIT NOT NULL DEFAULT 0
+
+--f) Agregar auditoría sobre la tabla Versión, respecto a Referente, revisor y aprobador. Esto significa generar una tabla de auditoría y crear el/los artefacto(s) de desarrollo
+--necesario(s) para que al modificar alguno de los tres nombrados, se guarde el valoranterior
+
+CREATE TABLE AUDITORIA_VERSION(
+ID INT NOT NULL, 
+ID_DOCUMENTO INT,
+REFERENTE INT,
+REVISOR INT,
+APROBADOR INT,
+
+)
