@@ -33,8 +33,8 @@ END
 /*c) Creación de un nuevo documento. 
 Debe generar no sólo el documento, sino también una versión inicial asociada a un usuario referente.
 El documento recién generado no se relaciona con otro y la descripción de la versión será ‘borrador’ hasta ser
-aprobado; luego cambiará.Los parámetros de crear_documento son: @titulo varchar(250), @tipo char(1) y @referente int.*/CREATE PROCEDURE SP_CREAR_DOCUMENTO @TITULO VARCHAR(250), @TIPO CHAR(1), @REFERENTE INTAS BEGIN INSERT INTO DOCUMENTO (TITULO, TIPO, VERSION_ACTUAL) VALUES ( @titulo, @tipo, 'borrador')INSERT INTO VERSION  (ID_DOCUMENTO,VERSION,FECHA_CREACION,BORRADOR,REFERENTE)
+aprobado; luego cambiará.Los parámetros de crear_documento son: @titulo varchar(250), @tipo char(1) y @referente int.*/CREATE PROCEDURE SP_CREAR_DOCUMENTO @TITULO VARCHAR(250), @TIPO CHAR(1), @REFERENTE INTAS BEGIN INSERT INTO DOCUMENTO (TITULO, TIPO, VERSION_ACTUAL) VALUES ( @titulo, @tipo, 'borrador')INSERT INTO VERSION  (ID_DOCUMENTO,VERSION,FECHA_CREACION,BORRADOR,REFERENTE)
 SELECT DOCUMENTO.ID, 'borrador', GETDATE(), 1, @REFERENTE FROM DOCUMENTO WHERE TITULO=@TITULO
-END--PRUEBA -- EXEC SP_CREAR_DOCUMENTO 'MODELO', 1, 1 --SELECT * FROM DOCUMENTO/* d) Asociación de documentos. Debe crear una relación entre documentos, del tipo indicado.
+END--PRUEBA -- EXEC SP_CREAR_DOCUMENTO 'MODELO', 1, 1 --SELECT * FROM DOCUMENTO/* d) Asociación de documentos. Debe crear una relación entre documentos, del tipo indicado.
 De ser ‘P’ (padre), deber reemplazar, de existir, a una previa relación del documento origen de tipo padre. 
-Los parámetros de crear_documento son: @documeno_origen int, @documento_destino int, tipo_relación char(1).*/CREATE PROCEDURE SP_ASOCIAR_DOCUMENTO @DOCUMENTO_ORIGEN INT, @DOCUMENTO_DESTINO INT, @TIPO_RELACION CHAR(1)ASBEGINUPDATE RELACION SET ID_DOCUMENTO_ORIGEN=@DOCUMENTO_ORIGEN WHERE ID_DOCUMENTO_DESTINO=@DOCUMENTO_DESTINO,
+Los parámetros de crear_documento son: @documeno_origen int, @documento_destino int, tipo_relación char(1).*/CREATE PROCEDURE SP_ASOCIAR_DOCUMENTO @DOCUMENTO_ORIGEN INT, @DOCUMENTO_DESTINO INT, @TIPO_RELACION CHAR(1)ASBEGINUPDATE RELACION SET ID_DOCUMENTO_ORIGEN=@DOCUMENTO_ORIGEN WHERE ID_DOCUMENTO_DESTINO=@DOCUMENTO_DESTINO,
