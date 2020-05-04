@@ -14,7 +14,8 @@ INSERT INTO PARTICIPANTE ( id_usuario_ldap, nombre ) VALUES (3829,'Joaquin');
 INSERT INTO PARTICIPANTE ( id_usuario_ldap, nombre ) VALUES (521,'Ramiro');
 INSERT INTO PARTICIPANTE ( id_usuario_ldap, nombre ) VALUES (4672,'Juan');
 
-/*Inicializacion DOCUMENTO,VRSION y FUTUROS VENCIMIENTOS*/
+/*Inicializacion DOCUMENTO,VRSION y FUTUROS VENCIMIENTOS 
+para poder demostrar la funcionalidad de informe_vencimientos que borra las fechas vencidas al dia de hoy */
 
 INSERT INTO DOCUMENTO (titulo, tipo, version_actual, vencimiento)
 	VALUES ( 'Ejemplo1', 'P', 3, DATEADD(DD, -5, CURRENT_TIMESTAMP))
@@ -36,3 +37,44 @@ INSERT INTO FUTUROS_VENCIMIENTOS (orden_id, id_documento, vencimiento)
 /*Creacion de Relacion entre ambos documentos*/
 
 EXEC spRelacion_crearRelacion 1,2, 'P'
+SELECT * FROM RELACION
+
+/*prueba crearDocumento*/			  
+EXEC spDocumento_crearDocumento 'Prueba3', 'P', 2
+
+EXEC spDocumento_crearDocumento 'Prueba4', 'H', 4
+			     
+EXEC spDocumento_crearDocumento 'Prueba5', 'H', 6
+			     
+EXEC spDocumento_crearDocumento 'Prueba5', 'H', 9 			     
+SELECT * FROM DOCUMENTO
+SELECT * FROM VRSION	
+/*Prueba funcionamiento de crearRelacion*/			   
+EXEC spRelacion_crearRelacion 1,3, 'P'
+
+EXEC spRelacion_crearRelacion 3,5, 'H'
+			     
+EXEC spRelacion_crearRelacion 2,4, 'P'
+SELECT * FROM RELACION
+/*Prueba funcionamiento de trigger Auditoria/sp VERSION UPDATE/sp eliminarParticipante*/			     
+UPDATE VRSION SET revisor = 4 WHERE id_documento=3
+UPDATE VRSION SET revisor = 7 WHERE id_documento=4
+UPDATE VRSION SET revisor = 1 WHERE id_documento=5
+			     
+UPDATE VRSION SET aprobador = 5 WHERE id_documento=4			     
+UPDATE VRSION SET aprobador = 3 WHERE id_documento=5
+
+EXEC spVrsion_UpdateEstado 3
+EXEC spVrsion_UpdateEstado 4
+EXEC spVrsion_UpdateEstado 5
+SELECT * FROM DOCUMENTO
+SELECT * FROM VRSION			     
+			
+EXEC spParticipante_eliminar 4
+SELECT * FROM PARTICIPANTE			     
+SELECT * FROM VRSION			     
+SELECT * FROM AUDITORIA_VERSION
+/*Prueba informe Vencimientos*/			     
+SELECT * FROM FUTUROS_VENCIMIENTOS
+EXEC spFV_informeVencimientos
+SELECT * FROM FUTUROS_VENCIMIENTOS			     
