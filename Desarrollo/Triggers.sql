@@ -11,6 +11,5 @@ BEGIN
 	INSERT INTO AUDITORIA_VERSION (id, referente, revisor, aprobador) SELECT id, referente, revisor, aprobador FROM deleted
 END
 
-update VERSION set version='v2' where id=2
-
-select *  from VERSION
+-- prueba -- update VERSION set version='v2' where id=2
+-- prueba -- select *  from VERSION

@@ -58,6 +58,8 @@ APROBADOR INT,
 
 )
 
+--h)Informe Vencimientos
+
 
 CREATE TABLE futuros_vencimientos
 (
@@ -65,21 +67,3 @@ CREATE TABLE futuros_vencimientos
     id_documento INT,
     vencimiento datetime
 )
-
-select*from PARTICIPANTE
-select* from version
-select * from DOCUMENTO
-SELECT * FROM RELACION
-select *  from AUDITORIA_VERSION
-select * from futuros_vencimientos
-
-
-insert into PARTICIPANTE values (1,565656,'Arturo',0)
-insert into PARTICIPANTE values (2,5644456,'Marta',0)
-
-insert into DOCUMENTO values('la mancha','a','v1','2021-17-02',0)
-insert into DOCUMENTO values('la mancha 2','a','v1','2021-17-02',0)
-
-
-insert into VERSION values(1,'v1','2019-01-01','2019-01-01',0,null,1,null,null,0)
-insert into futuros_vencimientos values(4,GETDATE())
