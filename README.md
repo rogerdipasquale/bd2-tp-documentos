@@ -1,3 +1,6 @@
+cambios comiteados
+
+
 # bd2-tp-documentos
 # BD II - Trabajo Práctico de Versionado de Documentos - 2020
 
