@@ -19,4 +19,4 @@ instalar [carpetaProyecto] [server] [usuario] [password] [baseDeDatos]
 
 Se intentará conectar a una instancia [server]\sqlexpress , suponiendo que estamos trabajando con un SQL Express. Si es distinta, pueden cambiar el .bat a su conveniencia.
 
-
+## Modificación ##
